@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using System.Globalization;
-
 namespace Microsoft.Azure.Devices.Samples
 {
     public static class Program
@@ -61,13 +58,13 @@ namespace Microsoft.Azure.Devices.Samples
             int port = int.Parse(s_port, CultureInfo.InvariantCulture);
 
             Console.WriteLine("Starting Host Service using;");
-            Console.WriteLine($"Connection String: {s_connectionString.Substring(0,s_connectionString.IndexOf("SharedAccessKey=") + 16) + "*****************"}");
+            Console.WriteLine($"Connection String: {s_connectionString.Substring(0, s_connectionString.IndexOf("SharedAccessKey=") + 16) + "*****************"}");
             Console.WriteLine($"Device ID: {s_deviceId}");
-            Console.WriteLine($"Port: {s_port}");      
+            Console.WriteLine($"Port: {s_port}");
 
             Console.WriteLine();
 
-            Console.WriteLine($"Waiting for Host Application Connection - e.g. Connect using SSH <username>@localhost -p {s_port}");    
+            Console.WriteLine($"Waiting for Host Application Connection - e.g. Connect using SSH <username>@localhost -p {s_port}");
 
             Console.WriteLine();
 

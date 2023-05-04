@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using System.Globalization;
-using System.Threading;
-
 namespace Microsoft.Azure.Devices.Client.Samples
 {
     public static class Program
@@ -17,19 +13,19 @@ namespace Microsoft.Azure.Devices.Client.Samples
         // - pass this value as a command-prompt argument
         // - set the IOTHUB_DEVICE_CONN_STRING environment variable 
         // - create a launchSettings.json (see launchSettings.json.template) containing the variable
-        private static string s_deviceConnectionString = Environment.GetEnvironmentVariable("IOTHUB_DEVICE_CONN_STRING") ?? "";
+        private static string s_deviceConnectionString = Environment.GetEnvironmentVariable("IOTHUB_DEVICE_CONN_STRING") ?? "HostName=Balajitesthub.azure-devices.net;SharedAccessKeyName=device;SharedAccessKey=pZwy6zzdLDmwC3DEgFoNLAvLpE1HGMBRzYFiCP1t3eM=";
 
         // Host name or IP address of a service the device will proxy traffic to.
         // - pass this value as a command-prompt argument
         // - set the REMOTE_HOST_NAME environment variable 
         // - create a launchSettings.json (see launchSettings.json.template) containing the variable
-        private static string s_hostName = Environment.GetEnvironmentVariable("REMOTE_HOST_NAME") ?? "";
+        private static string s_hostName = Environment.GetEnvironmentVariable("REMOTE_HOST_NAME") ?? "192.168.1.19";
 
         // Port of a service the device will proxy traffic to.
         // - pass this value as a command-prompt argument
         // - set the REMOTE_PORT environment variable 
         // - create a launchSettings.json (see launchSettings.json.template) containing the variable
-        private static string s_port = Environment.GetEnvironmentVariable("REMOTE_PORT") ?? "";
+        private static string s_port = Environment.GetEnvironmentVariable("REMOTE_PORT") ?? "443";
 
         // Select one of the following transports used by DeviceClient to connect to IoT Hub.
         private static readonly TransportType s_transportType = TransportType.Amqp;
@@ -66,15 +62,15 @@ namespace Microsoft.Azure.Devices.Client.Samples
             int port = int.Parse(s_port, CultureInfo.InvariantCulture);
 
             Console.WriteLine("Starting Device Service using;");
-            Console.WriteLine($"Connection String: {s_deviceConnectionString.Substring(0,s_deviceConnectionString.IndexOf("SharedAccessKey=") + 16) + "*****************"}");
+            Console.WriteLine($"Connection String: {s_deviceConnectionString.Substring(0, s_deviceConnectionString.IndexOf("SharedAccessKey=") + 16) + "*****************"}");
             Console.WriteLine($"HostName: {s_hostName}");
-            Console.WriteLine($"Port: {s_port}");     
+            Console.WriteLine($"Port: {s_port}");
 
             Console.WriteLine();
 
-            Console.WriteLine($"Waiting for Connection from Host");    
+            Console.WriteLine($"Waiting for Connection from Host");
 
-            Console.WriteLine();       
+            Console.WriteLine();
 
             using (DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(s_deviceConnectionString, s_transportType))
             {
