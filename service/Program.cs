@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using System.Globalization;
+
 namespace Microsoft.Azure.Devices.Samples
 {
     public static class Program
