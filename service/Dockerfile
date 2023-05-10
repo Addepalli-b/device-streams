@@ -1,13 +1,17 @@
-# Use the official Microsoft .NET 5.0 SDK image as the base image
-FROM mcr.microsoft.com/dotnet/sdk:5.0
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /source
 
-# Expose the necessary ports for Azure Device Streams (2222) and HTTPS (443)
-EXPOSE 2222
-EXPOSE 443
+# copy csproj and restore as distinct layers
+COPY *.csproj .
+RUN dotnet restore
 
-# Copy everything
-COPY . /App
+# copy everything else and build app
+COPY . .
+RUN dotnet publish  --self-contained false --no-restore -o /app
 
-WORKDIR /App
 
-ENTRYPOINT ["dotnet", "run", "--project", "device.csproj"]
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+WORKDIR /app
+COPY --from=build /app .
+CMD  ["dotnet", "device.dll"]
